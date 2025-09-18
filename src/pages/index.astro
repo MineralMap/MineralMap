@@ -1,5 +1,12 @@
 ---
-
+const minerals = [
+	{ name: 'Quartz', info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.' },
+	{ name: 'Feldspar', info: 'Feldspar is a group of rock-forming tectosilicate minerals.' },
+	{ name: 'Mica', info: 'Mica is a group of sheet silicate minerals.' },
+	{ name: 'Pyrite', info: 'Pyrite, also known as fool’s gold, is an iron sulfide mineral with a metallic luster.' },
+	{ name: 'Amethyst', info: 'Amethyst is a purple variety of quartz often used as a gemstone.' },
+	{ name: 'Calcite', info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.' }
+];
 ---
 
 <html lang="en">
@@ -8,9 +15,30 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Mineral Map</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<html lang="en">
+			<head>
+				<meta charset="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<title>Mineral Map | Home</title>
+				<link rel="stylesheet" href="/src/styles/theme.css" />
+			</head>
+			<body>
+				<div class="container">
+					<h1>Welcome to the Mineral Map</h1>
+					<nav>
+						<ul>
+							<li><a href="/minerals">Minerals</a></li>
+							  <li><a href="/guided-tour">Guided Tour</a></li>
+							  <li><a href="/about">About</a></li>
+							  <li><a href="/help">Help</a></li>
+						</ul>
+					</nav>
+					<p>Explore the minerals in the Calvin University Mineral Museum, watch videos, and learn more about each specimen.</p>
+				</div>
+			</body>
+		</html>
 	</body>
 </html>
