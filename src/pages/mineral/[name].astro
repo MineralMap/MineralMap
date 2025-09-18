@@ -1,0 +1,72 @@
+---
+// This is a dynamic route for mineral pages
+
+export async function getStaticPaths() {
+    // Example mineral data
+    const minerals = [
+        {
+            name: "Quartz",
+            info: "Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.",
+        },
+        {
+            name: "Feldspar",
+            info: "Feldspar is a group of rock-forming tectosilicate minerals.",
+        },
+        { 
+            name: "Mica", 
+            info: "Mica is a group of sheet silicate minerals." },
+        {
+            name: "Pyrite",
+            info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
+        },
+        {
+            name: "Amethyst",
+            info: "Amethyst is a purple variety of quartz often used as a gemstone.",
+        },
+        {
+            name: "Calcite",
+            info: "Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.",
+        },
+    ];
+    return minerals.map((mineral) => ({ params: { name: mineral.name } }));
+}
+
+const minerals = {
+    Quartz: "Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.",
+    Feldspar: "Feldspar is a group of rock-forming tectosilicate minerals.",
+    Mica: "Mica is a group of sheet silicate minerals.",
+    Pyrite: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
+    Amethyst:
+        "Amethyst is a purple variety of quartz often used as a gemstone.",
+    Calcite:
+        "Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.",
+};
+
+const { name } = Astro.params;
+const info = Object.prototype.hasOwnProperty.call(minerals, name)
+    ? minerals[name as keyof typeof minerals]
+    : "Mineral not found.";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{name} | Mineral Map</title>
+        <link rel="stylesheet" href="/src/styles/theme.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>{name}</h1>
+            <p>{info}</p>
+            <video controls poster="/placeholder.jpg">
+                <!-- temp video currently in place -->
+                <source src={`/videos/test.mp4`} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div style="margin-top:1.5rem;">
+                <a href="/minerals">&#8592; Back to Minerals</a>
+            </div>
+        </div>
+    </body>
+</html>
