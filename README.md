@@ -1,4 +1,4 @@
-# 🏛️ Mineral Map
+# Mineral Map
 
 > **Interactive Museum Web Application for Calvin University**
 >
