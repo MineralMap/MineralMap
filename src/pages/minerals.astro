@@ -8,42 +8,37 @@ const minerals = [
     name: 'Quartz',
     info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.',
     category: 'Silicate',
+    slug: 'quartz',
   },
   {
     name: 'Feldspar',
     info: 'Feldspar is a group of rock-forming tectosilicate minerals.',
     category: 'Silicate',
+    slug: 'feldspar',
   },
-  { name: 'Mica', info: 'Mica is a group of sheet silicate minerals.', category: 'Silicate' },
+  {
+    name: 'Mica',
+    info: 'Mica is a group of sheet silicate minerals.',
+    category: 'Silicate',
+    slug: 'mica',
+  },
   {
     name: 'Pyrite',
     info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
     category: 'Sulfide',
+    slug: 'pyrite',
   },
   {
     name: 'Amethyst',
     info: 'Amethyst is a purple variety of quartz often used as a gemstone.',
     category: 'Silicate',
+    slug: 'amethyst',
   },
   {
     name: 'Calcite',
     info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.',
     category: 'Carbonate',
-  },
-  {
-    name: 'Magnetite',
-    info: 'Magnetite is a rock mineral and one of the main iron ores with magnetic properties.',
-    category: 'Oxide',
-  },
-  {
-    name: 'Gypsum',
-    info: 'Gypsum is a soft sulfate mineral composed of calcium sulfate dihydrate.',
-    category: 'Sulfate',
-  },
-  {
-    name: 'Fluorite',
-    info: 'Fluorite is the mineral form of calcium fluoride, known for its vibrant colors.',
-    category: 'Halide',
+    slug: 'calcite',
   },
 ];
 ---
@@ -58,7 +53,7 @@ const minerals = [
   <section class="section-padding">
     <div class="container-brand">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {minerals.map((mineral) => <MineralCard name={mineral.name} info={mineral.info} />)}
+        {minerals.map((mineral) => <MineralCard name={mineral.name} info={mineral.info} link={`/mineral/${mineral.slug}`} />)}
       </div>
     </div>
   </section>
