@@ -1,26 +1,209 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const tourSteps = [
+  {
+    number: 1,
+    title: 'Museum Entrance',
+    description: 'Start at the entrance and pick up a museum map.',
+    icon: 'fas fa-building-columns',
+    duration: '5 min',
+  },
+  {
+    number: 2,
+    title: 'Quartz Exhibit',
+    description: 'Visit the Quartz exhibit to learn about its unique properties.',
+    icon: 'fas fa-gem',
+    duration: '10 min',
+  },
+  {
+    number: 3,
+    title: 'Pyrite Display',
+    description: 'Continue to the Pyrite display and discover why it\'s called "fool\'s gold."',
+    icon: 'fas fa-star',
+    duration: '10 min',
+  },
+  {
+    number: 4,
+    title: 'Central Gallery',
+    description: 'See the Amethyst and Calcite specimens in the central gallery.',
+    icon: 'fas fa-eye',
+    duration: '15 min',
+  },
+  {
+    number: 5,
+    title: 'Video Presentations',
+    description: 'Watch the informational videos on each mineral page for more details.',
+    icon: 'fas fa-video',
+    duration: '20 min',
+  },
+  {
+    number: 6,
+    title: 'Interactive Exhibits',
+    description: 'Explore our hands-on exhibits and touch specimens.',
+    icon: 'fas fa-hand-pointer',
+    duration: '15 min',
+  },
+];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guided Tour | Mineral Map</title>
-    <link rel="stylesheet" href="/src/styles/theme.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Guided Tour</h1>
-  <p>This is where the interactive guided user tour will be set up eventually.</p>
-      <ol style="text-align:left; max-width:400px; margin:2rem auto;">
-        <li>Start at the entrance and pick up a museum map.</li>
-        <li>Visit the Quartz exhibit to learn about its unique properties.</li>
-        <li>Continue to the Pyrite display and discover why it's called "fool's gold."</li>
-        <li>See the Amethyst and Calcite specimens in the central gallery.</li>
-        <li>Watch the informational videos on each mineral page for more details.</li>
-        <li>Ask staff for more information or help at any time.</li>
-      </ol>
-      <a href="/">&#8592; Back to Home</a>
+<BaseLayout title="Guided Tour" description="Take a guided tour through our mineral collection">
+  <Hero
+    title="Guided Museum Tour"
+    subtitle="Follow our curated path through the museum's highlights"
+  />
+
+  <!-- Tour Info -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <div class="stats shadow w-full">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-8 h-8 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Duration</div>
+          <div class="stat-value text-primary">75 min</div>
+          <div class="stat-desc">Average tour time</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-8 h-8 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Difficulty</div>
+          <div class="stat-value text-secondary">Easy</div>
+          <div class="stat-desc">Suitable for all ages</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-8 h-8 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Stops</div>
+          <div class="stat-value">6</div>
+          <div class="stat-desc">Key exhibit locations</div>
+        </div>
+      </div>
     </div>
-  </body>
-</html>
+  </section>
+
+  <!-- Tour Steps -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Tour Itinerary</h2>
+
+      <div class="max-w-4xl mx-auto">
+        <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+          {
+            tourSteps.map((step, index) => (
+              <li>
+                {index > 0 && <hr class="bg-primary" />}
+                <div class="timeline-middle">
+                  <div class="w-12 h-12 bg-primary text-primary-content rounded-full flex items-center justify-center">
+                    <i class={step.icon} />
+                  </div>
+                </div>
+                <div
+                  class={`timeline-${index % 2 === 0 ? 'start' : 'end'} mb-10 ${index % 2 === 0 ? 'md:text-end' : ''}`}
+                >
+                  <time class="font-mono italic text-sm opacity-50">{step.duration}</time>
+                  <div class="text-lg font-black">
+                    Step {step.number}: {step.title}
+                  </div>
+                  <p class="text-base-content/80">{step.description}</p>
+                </div>
+                {index < tourSteps.length - 1 && <hr class="bg-primary" />}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+        <button class="btn btn-primary btn-lg w-full sm:w-auto">
+          Start Virtual Tour
+          <i class="fas fa-play ml-2"></i>
+        </button>
+        <button class="btn btn-outline btn-lg w-full sm:w-auto">
+          Download Map
+          <i class="fas fa-download ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips Section -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Tour Tips</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-primary">
+              <i class="fas fa-clock"></i>
+              Best Time to Visit
+            </h3>
+            <p>Weekday mornings are less crowded, offering a more intimate experience.</p>
+          </div>
+        </div>
+
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-primary">
+              <i class="fas fa-camera"></i>
+              Photography
+            </h3>
+            <p>
+              Photography is allowed in most areas. Flash photography restricted in some exhibits.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-primary">
+              <i class="fas fa-users"></i>
+              Group Tours
+            </h3>
+            <p>Group tours available with advance booking. Special rates for schools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

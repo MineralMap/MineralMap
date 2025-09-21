@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-primary: 138 20 43; /* #8A142B in RGB */
+    --color-brand-secondary: 239 205 2; /* #EFCD02 in RGB */
+    --color-brand-neutral: 255 255 255; /* #FFFFFF in RGB */
+    --color-brand-dark: 46 46 46; /* #2E2E2E in RGB */
+    --color-brand-light: 245 245 245; /* #F5F5F5 in RGB */
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-body text-base-content bg-base-100 min-h-screen;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-primary font-semibold;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-base-200;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/80;
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn-brand {
+    @apply btn btn-primary hover:shadow-lg transition-all duration-300;
+  }
+
+  .btn-outline-brand {
+    @apply btn btn-outline btn-primary hover:shadow-md transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card-brand {
+    @apply card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply text-base-content hover:text-primary transition-colors duration-200 font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-primary border-b-2 border-primary;
+  }
+
+  /* Section styles */
+  .section-padding {
+    @apply py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12;
+  }
+
+  .container-brand {
+    @apply container mx-auto max-w-7xl;
+  }
+
+  /* Mineral card specific */
+  .mineral-card {
+    @apply card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+
+  /* Hero section */
+  .hero-gradient {
+    @apply bg-gradient-to-br from-primary via-primary to-primary-focus;
+  }
+
+  /* Text styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/20;
+  }
+
+  /* Focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  /* Mobile-specific utilities */
+  .mobile-full-width {
+    @apply w-full sm:w-auto;
+  }
+
+  .mobile-stack {
+    @apply flex-col sm:flex-row;
+  }
+
+  .mobile-text-center {
+    @apply text-center sm:text-left;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Loading spinner */
+.spinner {
+  @apply loading loading-spinner loading-lg text-primary;
+}
+
+/* Responsive video container */
+.video-container {
+  @apply relative w-full overflow-hidden rounded-lg bg-base-200;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-container video,
+.video-container iframe {
+  @apply absolute top-0 left-0 w-full h-full;
+}

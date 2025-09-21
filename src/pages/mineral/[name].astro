@@ -1,72 +1,136 @@
 ---
-// This is a dynamic route for mineral pages
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
+// This is a dynamic route for mineral pages
 export async function getStaticPaths() {
-    // Example mineral data
-    const minerals = [
-        {
-            name: "Quartz",
-            info: "Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.",
-        },
-        {
-            name: "Feldspar",
-            info: "Feldspar is a group of rock-forming tectosilicate minerals.",
-        },
-        { 
-            name: "Mica", 
-            info: "Mica is a group of sheet silicate minerals." },
-        {
-            name: "Pyrite",
-            info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
-        },
-        {
-            name: "Amethyst",
-            info: "Amethyst is a purple variety of quartz often used as a gemstone.",
-        },
-        {
-            name: "Calcite",
-            info: "Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.",
-        },
-    ];
-    return minerals.map((mineral) => ({ params: { name: mineral.name } }));
+  // Example mineral data
+  const minerals = [
+    {
+      name: 'quartz',
+      displayName: 'Quartz',
+      info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.',
+    },
+    {
+      name: 'feldspar',
+      displayName: 'Feldspar',
+      info: 'Feldspar is a group of rock-forming tectosilicate minerals.',
+    },
+    {
+      name: 'mica',
+      displayName: 'Mica',
+      info: 'Mica is a group of sheet silicate minerals.',
+    },
+    {
+      name: 'pyrite',
+      displayName: 'Pyrite',
+      info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
+    },
+    {
+      name: 'amethyst',
+      displayName: 'Amethyst',
+      info: 'Amethyst is a purple variety of quartz often used as a gemstone.',
+    },
+    {
+      name: 'calcite',
+      displayName: 'Calcite',
+      info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.',
+    },
+  ];
+  return minerals.map((mineral) => ({
+    params: { name: mineral.name },
+    props: { mineral },
+  }));
 }
 
-const minerals = {
-    Quartz: "Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.",
-    Feldspar: "Feldspar is a group of rock-forming tectosilicate minerals.",
-    Mica: "Mica is a group of sheet silicate minerals.",
-    Pyrite: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
-    Amethyst:
-        "Amethyst is a purple variety of quartz often used as a gemstone.",
-    Calcite:
-        "Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.",
-};
+const { mineral } = Astro.props;
 
-const { name } = Astro.params;
-const info = Object.prototype.hasOwnProperty.call(minerals, name)
-    ? minerals[name as keyof typeof minerals]
-    : "Mineral not found.";
+if (!mineral) {
+  return Astro.redirect('/minerals');
+}
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{name} | Mineral Map</title>
-        <link rel="stylesheet" href="/src/styles/theme.css" />
-    </head>
-    <body>
-        <div class="container">
-            <h1>{name}</h1>
-            <p>{info}</p>
-            <video controls poster="/placeholder.jpg">
-                <!-- temp video currently in place -->
-                <source src={`/videos/test.mp4`} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-            <div style="margin-top:1.5rem;">
-                <a href="/minerals">&#8592; Back to Minerals</a>
-            </div>
+<BaseLayout
+  title={mineral.displayName}
+  description={`Learn about ${mineral.displayName} - ${mineral.info}`}
+>
+  <section class="section-padding">
+    <div class="container-brand">
+      <div class="max-w-4xl mx-auto">
+        <!-- Back Button -->
+        <div class="mb-8">
+          <a href="/minerals" class="btn btn-ghost btn-sm">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Back to Minerals
+          </a>
         </div>
-    </body>
-</html>
+
+        <!-- Mineral Header -->
+        <div class="text-center mb-8 lg:mb-12">
+          <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <i class="fas fa-gem mr-2 md:mr-3"></i>
+            {mineral.displayName}
+          </h1>
+          <div class="badge badge-secondary badge-lg">Mineral Specimen</div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <!-- Video Section -->
+          <div class="space-y-6">
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <h2 class="card-title text-xl mb-4">
+                  <i class="fas fa-play-circle mr-2"></i>
+                  Video Presentation
+                </h2>
+                <video controls poster="/placeholder.jpg" class="w-full rounded-lg">
+                  <source src="/videos/test.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Information Section -->
+          <div class="space-y-6">
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <h2 class="card-title text-xl mb-4">
+                  <i class="fas fa-info-circle mr-2"></i>
+                  About {mineral.displayName}
+                </h2>
+                <p class="text-base-content/80 leading-relaxed text-lg">
+                  {mineral.info}
+                </p>
+              </div>
+            </div>
+
+            <!-- Properties Card -->
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <h2 class="card-title text-xl mb-4">
+                  <i class="fas fa-list mr-2"></i>
+                  Properties
+                </h2>
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span class="font-medium">Type:</span>
+                    <span>Mineral</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-medium">Classification:</span>
+                    <span>Natural</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-medium">Status:</span>
+                    <span class="badge badge-success">On Display</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

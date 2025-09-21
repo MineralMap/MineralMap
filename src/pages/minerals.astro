@@ -1,32 +1,65 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MineralCard from '../components/MineralCard.astro';
+import Hero from '../components/Hero.astro';
+
 const minerals = [
-  { name: 'Quartz', info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.' },
-  { name: 'Feldspar', info: 'Feldspar is a group of rock-forming tectosilicate minerals.' },
-  { name: 'Mica', info: 'Mica is a group of sheet silicate minerals.' },
-  { name: 'Pyrite', info: 'Pyrite, also known as fool\'s gold, is an iron sulfide mineral with a metallic luster.' },
-  { name: 'Amethyst', info: 'Amethyst is a purple variety of quartz often used as a gemstone.' },
-  { name: 'Calcite', info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.' }
+  {
+    name: 'Quartz',
+    info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.',
+    category: 'Silicate',
+  },
+  {
+    name: 'Feldspar',
+    info: 'Feldspar is a group of rock-forming tectosilicate minerals.',
+    category: 'Silicate',
+  },
+  { name: 'Mica', info: 'Mica is a group of sheet silicate minerals.', category: 'Silicate' },
+  {
+    name: 'Pyrite',
+    info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
+    category: 'Sulfide',
+  },
+  {
+    name: 'Amethyst',
+    info: 'Amethyst is a purple variety of quartz often used as a gemstone.',
+    category: 'Silicate',
+  },
+  {
+    name: 'Calcite',
+    info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.',
+    category: 'Carbonate',
+  },
+  {
+    name: 'Magnetite',
+    info: 'Magnetite is a rock mineral and one of the main iron ores with magnetic properties.',
+    category: 'Oxide',
+  },
+  {
+    name: 'Gypsum',
+    info: 'Gypsum is a soft sulfate mineral composed of calcium sulfate dihydrate.',
+    category: 'Sulfate',
+  },
+  {
+    name: 'Fluorite',
+    info: 'Fluorite is the mineral form of calcium fluoride, known for its vibrant colors.',
+    category: 'Halide',
+  },
 ];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mineral List | Mineral Map</title>
-    <link rel="stylesheet" href="/src/styles/theme.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Mineral List</h1>
-      <ul>
-        {minerals.map((mineral) => (
-          <li>
-            <a href={`/mineral/${mineral.name}`}>{mineral.name}</a>
-          </li>
-        ))}
-      </ul>
-      <a href="/">&#8592; Back to Home</a>
+<BaseLayout title="Mineral Collection" description="Browse our extensive collection of minerals">
+  <Hero
+    title="Mineral Collection"
+    subtitle="Discover our extensive collection of minerals from around the world"
+  />
+
+  <!-- Minerals Grid -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {minerals.map((mineral) => <MineralCard name={mineral.name} info={mineral.info} />)}
+      </div>
     </div>
-  </body>
-</html>
+  </section>
+</BaseLayout>

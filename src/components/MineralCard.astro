@@ -1,0 +1,37 @@
+---
+export interface Props {
+  name: string;
+  info: string;
+  image?: string;
+  link?: string;
+}
+
+const { name, info, image, link } = Astro.props;
+const href = link || `/mineral/${name.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<div
+  class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+>
+  {
+    image && (
+      <figure class="px-6 pt-6">
+        <img src={image} alt={name} class="rounded-xl object-cover h-48 w-full" />
+      </figure>
+    )
+  }
+  <div class="card-body">
+    <h2 class="card-title text-primary text-xl">
+      <i class="fas fa-gem text-primary mr-2"></i>
+      {name}
+      <div class="badge badge-secondary badge-sm">Mineral</div>
+    </h2>
+    <p class="text-base-content/80 leading-relaxed">{info}</p>
+    <div class="card-actions justify-end mt-6">
+      <a href={href} class="btn btn-primary btn-sm hover:btn-primary-focus">
+        Learn More
+        <i class="fas fa-chevron-right ml-1"></i>
+      </a>
+    </div>
+  </div>
+</div>

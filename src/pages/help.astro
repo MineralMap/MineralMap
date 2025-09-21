@@ -1,18 +1,161 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const faqs = [
+  {
+    question: 'What are the museum hours?',
+    answer:
+      'We are open Tuesday through Saturday from 10 AM to 5 PM, and Sunday from 12 PM to 5 PM. Closed on Mondays and major holidays.',
+  },
+  {
+    question: 'Is there an admission fee?',
+    answer:
+      'General admission is $12 for adults, $8 for seniors (65+), $6 for students with ID, and free for children under 12.',
+  },
+  {
+    question: 'Can I take photographs?',
+    answer:
+      'Yes! Photography is allowed in most areas of the museum. Flash photography is restricted in certain exhibits to preserve specimens.',
+  },
+  {
+    question: 'Are guided tours available?',
+    answer:
+      'Yes, guided tours are available daily at 11 AM and 2 PM. Group tours can be arranged with advance booking.',
+  },
+  {
+    question: 'Is the museum wheelchair accessible?',
+    answer:
+      'Yes, our museum is fully wheelchair accessible with elevators and ramps throughout the facility.',
+  },
+  {
+    question: 'Can I touch the minerals?',
+    answer:
+      'We have designated touch specimens in our interactive exhibit area. Most display specimens are protected behind glass for preservation.',
+  },
+  {
+    question: 'Do you have a gift shop?',
+    answer:
+      'Yes! Our gift shop offers mineral specimens, educational materials, books, and unique geology-themed gifts.',
+  },
+  {
+    question: 'Is parking available?',
+    answer:
+      'Free parking is available in our visitor lot. Additional street parking is available nearby.',
+  },
+];
+
+const quickLinks = [
+  {
+    title: 'Museum Map',
+    icon: 'fas fa-map',
+    description: 'Download our interactive museum map',
+    link: '#',
+  },
+  {
+    title: 'Accessibility',
+    icon: 'fas fa-wheelchair',
+    description: 'Information about accessibility features',
+    link: '#',
+  },
+  {
+    title: 'Group Visits',
+    icon: 'fas fa-users',
+    description: 'Plan your group or school visit',
+    link: '#',
+  },
+  {
+    title: 'Membership',
+    icon: 'fas fa-ticket-alt',
+    description: 'Learn about membership benefits',
+    link: '#',
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Help | Mineral Map</title>
-		<link rel="stylesheet" href="/src/styles/theme.css" />
-	</head>
-	<body>
-		<div class="container">
-			<h1>Help</h1>
-			<p>Need assistance? Contact the museum staff or refer to the information on each mineral page.</p>
-			<a href="/">&#8592; Back to Home</a>
-		</div>
-	</body>
-</html>
+<BaseLayout
+  title="Help & FAQ"
+  description="Get help and find answers to frequently asked questions"
+>
+  <Hero
+    title="Help Center"
+    subtitle="Find answers to common questions and get the support you need"
+  />
+
+  <!-- Quick Links -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Quick Links</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          quickLinks.map((link) => (
+            <a href={link.link} class="card bg-base-100 shadow-xl hover-lift">
+              <div class="card-body items-center text-center">
+                <i class={`${link.icon} text-4xl mb-2 text-primary`} />
+                <h3 class="card-title text-lg">{link.title}</h3>
+                <p class="text-sm text-base-content/70">{link.description}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+      <div class="max-w-4xl mx-auto space-y-4">
+        {
+          faqs.map((faq, index) => (
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="faq-accordion" checked={index === 0} />
+              <div class="collapse-title text-xl font-medium">{faq.question}</div>
+              <div class="collapse-content">
+                <p class="pt-2 text-base-content/80">{faq.answer}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Still Need Help?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body items-center text-center">
+            <i class="fas fa-envelope text-4xl text-primary mb-4"></i>
+            <h3 class="card-title">Email Us</h3>
+            <p class="text-base-content/70 mb-4">Get answers within 24 hours</p>
+            <a href="mailto:museum@calvin.edu" class="btn btn-primary btn-sm">
+              museum@calvin.edu
+            </a>
+          </div>
+        </div>
+
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body items-center text-center">
+            <i class="fas fa-phone text-4xl text-primary mb-4"></i>
+            <h3 class="card-title">Call Us</h3>
+            <p class="text-base-content/70 mb-4">Speak with our staff</p>
+            <a href="tel:+16165266000" class="btn btn-primary btn-sm"> (616) 526-6000 </a>
+          </div>
+        </div>
+
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body items-center text-center">
+            <i class="fas fa-comments text-4xl text-primary mb-4"></i>
+            <h3 class="card-title">Live Chat</h3>
+            <p class="text-base-content/70 mb-4">Chat with us online</p>
+            <button class="btn btn-primary btn-sm"> Start Chat </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

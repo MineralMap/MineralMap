@@ -1,44 +1,68 @@
 ---
-const minerals = [
-	{ name: 'Quartz', info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.' },
-	{ name: 'Feldspar', info: 'Feldspar is a group of rock-forming tectosilicate minerals.' },
-	{ name: 'Mica', info: 'Mica is a group of sheet silicate minerals.' },
-	{ name: 'Pyrite', info: 'Pyrite, also known as fool’s gold, is an iron sulfide mineral with a metallic luster.' },
-	{ name: 'Amethyst', info: 'Amethyst is a purple variety of quartz often used as a gemstone.' },
-	{ name: 'Calcite', info: 'Calcite is a carbonate mineral and the most stable polymorph of calcium carbonate.' }
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import MineralCard from '../components/MineralCard.astro';
+
+const featuredMinerals = [
+  {
+    name: 'Quartz',
+    info: 'Quartz is a hard, crystalline mineral composed of silicon and oxygen atoms.',
+  },
+  {
+    name: 'Pyrite',
+    info: "Pyrite, also known as fool's gold, is an iron sulfide mineral with a metallic luster.",
+  },
+  { name: 'Amethyst', info: 'Amethyst is a purple variety of quartz often used as a gemstone.' },
+];
+
+const stats = [
+  { label: 'Minerals', value: '500+' },
+  { label: 'Exhibits', value: '12' },
+  { label: 'Years of History', value: '147' },
+  { label: 'Annual Visitors', value: '10K+' },
 ];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Mineral Map</title>
-	</head>
-	<body>
-		<html lang="en">
-			<head>
-				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Mineral Map | Home</title>
-				<link rel="stylesheet" href="/src/styles/theme.css" />
-			</head>
-			<body>
-				<div class="container">
-					<h1>Welcome to the Mineral Map</h1>
-					<nav>
-						<ul>
-							<li><a href="/minerals">Minerals</a></li>
-							  <li><a href="/guided-tour">Guided Tour</a></li>
-							  <li><a href="/about">About</a></li>
-							  <li><a href="/help">Help</a></li>
-						</ul>
-					</nav>
-					<p>Explore the minerals in the Calvin University Mineral Museum, watch videos, and learn more about each specimen.</p>
-				</div>
-			</body>
-		</html>
-	</body>
-</html>
+<BaseLayout title="Home" description="Explore the wonders of the Mineral Map collection">
+  <Hero title="Welcome to the Mineral Map" subtitle="Explore our comprehensive mineral collection">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/minerals" class="btn btn-primary btn-lg w-full sm:w-auto">
+        Explore Collection
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <a href="/guided-tour" class="btn btn-outline btn-lg w-full sm:w-auto"> Take a Tour </a>
+    </div>
+  </Hero>
+
+  <!-- Stats Section -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+        {
+          stats.map((stat) => (
+            <div class="stat text-center">
+              <div class="stat-title">{stat.label}</div>
+              <div class="stat-value text-primary">{stat.value}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Minerals -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Featured Minerals</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredMinerals.map((mineral) => <MineralCard name={mineral.name} info={mineral.info} />)}
+      </div>
+      <div class="text-center mt-12">
+        <a href="/minerals" class="btn btn-outline btn-primary">
+          View All Minerals
+          <i class="fas fa-chevron-right ml-1"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,18 +1,190 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const teamMembers = [
+  {
+    name: 'Dr. Sarah Johnson',
+    role: 'Museum Director',
+    image: '/testLogo.png',
+    bio: 'Leading our museum for over 15 years with expertise in mineralogy.',
+  },
+  {
+    name: 'Prof. Michael Chen',
+    role: 'Chief Curator',
+    image: '/testLogo.png',
+    bio: 'Specializing in rare mineral specimens and geological formations.',
+  },
+  {
+    name: 'Emily Rodriguez',
+    role: 'Education Coordinator',
+    image: '/testLogo.png',
+    bio: 'Developing engaging educational programs for all age groups.',
+  },
+];
+
+const milestones = [
+  {
+    year: '1876',
+    event: 'Collection Founded',
+    description: 'Mineral Map establishes its first mineral collection.',
+  },
+  {
+    year: '1925',
+    event: 'Major Expansion',
+    description: 'Collection expands to include over 1,000 specimens.',
+  },
+  {
+    year: '1987',
+    event: 'Modern Facility',
+    description: 'Move to current state-of-the-art facility.',
+  },
+  {
+    year: '2020',
+    event: 'Digital Initiative',
+    description: 'Launch of interactive digital exhibits and virtual tours.',
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>About | Mineral Map</title>
-		<link rel="stylesheet" href="/src/styles/theme.css" />
-	</head>
-	<body>
-		<div class="container">
-			<h1>About</h1>
-			<p>This site provides information and videos about minerals in the Calvin University Mineral Museum.</p>
-			<a href="/">&#8592; Back to Home</a>
-		</div>
-	</body>
-</html>
+<BaseLayout title="About Us" description="Learn about the Mineral Map collection">
+  <Hero
+    title="About Our Museum"
+    subtitle="A legacy of geological education and discovery since 1876"
+  />
+
+  <!-- Mission Section -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">Our Mission</h2>
+        <p class="text-lg leading-relaxed text-base-content/80 mb-6">
+          Mineral Map is dedicated to preserving, studying, and sharing the Earth's geological
+          treasures. We strive to inspire curiosity and foster understanding of our planet's mineral
+          heritage through world-class exhibits, educational programs, and research initiatives.
+        </p>
+        <p class="text-lg leading-relaxed text-base-content/80">
+          Our collection spans over 500 unique mineral specimens from six continents, offering
+          visitors an unparalleled journey through the diversity and beauty of Earth's geological
+          formations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- History Timeline -->
+  <section class="section-padding bg-base-200">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Our History</h2>
+      <div class="max-w-4xl mx-auto">
+        <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+          {
+            milestones.map((milestone, index) => (
+              <li>
+                {index > 0 && <hr />}
+                <div class="timeline-middle">
+                  <i class="fas fa-check-circle text-primary" />
+                </div>
+                <div
+                  class={`timeline-${index % 2 === 0 ? 'start' : 'end'} mb-10 ${index % 2 === 0 ? 'md:text-end' : ''}`}
+                >
+                  <time class="font-mono italic text-primary font-bold">{milestone.year}</time>
+                  <div class="text-lg font-black">{milestone.event}</div>
+                  <p class="text-base-content/80">{milestone.description}</p>
+                </div>
+                {index < milestones.length - 1 && <hr />}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Meet Our Team</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {
+          teamMembers.map((member) => (
+            <div class="card bg-base-100 shadow-xl">
+              <figure class="px-10 pt-10">
+                <div class="avatar">
+                  <div class="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img src={member.image} alt={member.name} />
+                  </div>
+                </div>
+              </figure>
+              <div class="card-body items-center text-center">
+                <h3 class="card-title">{member.name}</h3>
+                <p class="text-sm text-primary font-semibold">{member.role}</p>
+                <p class="text-base-content/70">{member.bio}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section
+    class="section-padding bg-gradient-to-br from-primary to-primary-focus text-primary-content"
+  >
+    <div class="container-brand">
+      <h2 class="text-3xl font-bold text-center mb-12">Our Values</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div class="text-center">
+          <i class="fas fa-graduation-cap text-5xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Education</h3>
+          <p class="opacity-90">Inspiring lifelong learning through hands-on experiences</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-microscope text-5xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Research</h3>
+          <p class="opacity-90">Advancing geological knowledge through scientific study</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-globe text-5xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Conservation</h3>
+          <p class="opacity-90">Preserving Earth's mineral heritage for future generations</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-handshake text-5xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Community</h3>
+          <p class="opacity-90">Building connections through shared discovery</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section-padding">
+    <div class="container-brand">
+      <div class="card bg-base-100 shadow-xl max-w-2xl mx-auto">
+        <div class="card-body text-center">
+          <h2 class="card-title justify-center text-2xl mb-4">Visit Us</h2>
+          <div class="space-y-4">
+            <p class="flex items-center justify-center gap-2">
+              <i class="fas fa-map-marker-alt text-primary"></i>
+              <span>3201 Burton St SE, Grand Rapids, MI 49546</span>
+            </p>
+            <p class="flex items-center justify-center gap-2">
+              <i class="fas fa-phone text-primary"></i>
+              <span>(616) 526-6000</span>
+            </p>
+            <p class="flex items-center justify-center gap-2">
+              <i class="fas fa-envelope text-primary"></i>
+              <span>info@mineralmap.com</span>
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center mt-6">
+            <a href="/help" class="btn btn-primary w-full sm:w-auto">Get Directions</a>
+            <a href="/help" class="btn btn-outline w-full sm:w-auto">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
