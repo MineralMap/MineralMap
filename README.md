@@ -10,11 +10,9 @@ A modern, professional web application for exploring the Calvin University Miner
 
 - **Professional UI/UX** - Custom "museum" theme with brand-consistent design
 - **Responsive Design** - Optimized for all devices and screen sizes
-- **Interactive Search** - Filter and search through mineral collections
 - **Guided Tours** - Interactive timeline-based museum tours
 - **Accessibility** - WCAG compliant with full keyboard navigation
-- **Theme System** - Easy theme switching with seamless branding updates
-- **Developer Experience** - ESLint, Prettier, TypeScript, and Git hooks
+- **Developer Experience** - ESLint, Prettier and TypeScript
 
 ## Quick Start
 
@@ -95,9 +93,6 @@ npm run lint:fix        # Fix ESLint issues
 npm run format          # Format with Prettier
 npm run format:check    # Check formatting
 npm run check           # Type check with TypeScript
-
-# Git Hooks
-npm run prepare         # Setup Husky git hooks
 ```
 
 ### Code Standards
@@ -105,7 +100,6 @@ npm run prepare         # Setup Husky git hooks
 - **ESLint** - Code linting with Astro and TypeScript rules
 - **Prettier** - Code formatting with Astro plugin
 - **TypeScript** - Type safety and better developer experience
-- **Husky** - Git hooks for pre-commit linting and formatting
 - **Lint-staged** - Run linters on staged files only
 
 ### Adding New Pages
@@ -171,12 +165,6 @@ npm run build
 
 The built files will be in the `dist/` directory, ready for deployment to any static hosting service.
 
-### Recommended Hosting
-
-- Netlify
-- Vercel
-- GitHub Pages
-- AWS S3 + CloudFront
 
 ## Contributing
 
